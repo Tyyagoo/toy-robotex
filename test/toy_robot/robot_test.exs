@@ -59,4 +59,30 @@ defmodule ToyRobot.RobotTest do
       end)
     end
   end
+
+  describe "when receiving a list of movement commands" do
+    setup do
+      %{robot: Robot.new()}
+    end
+
+    test "it must ends in the correct position (3, 3, east)", %{robot: robot} do
+      robot =
+        robot
+        |> Robot.move()
+        |> Robot.rotate(:right)
+        |> Robot.move()
+        |> Robot.rotate(:left)
+        |> Robot.move()
+        |> Robot.move()
+        |> Robot.rotate(:left)
+        |> Robot.move()
+        |> Robot.rotate(:right)
+        |> Robot.rotate(:right)
+        |> Robot.move()
+        |> Robot.move()
+        |> Robot.move()
+
+      assert %{x: 3, y: 3, facing: :east} = robot
+    end
+  end
 end
