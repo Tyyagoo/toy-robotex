@@ -14,9 +14,9 @@ defmodule ToyRobot.RobotTest do
       assert robot.y == 1
     end
 
-    test "it must stop on table limit", %{robot: robot} do
+    test "it must walk how many times was asked", %{robot: robot} do
       robot = 1..100 |> Enum.reduce(robot, fn _, acc -> acc |> Robot.move() end)
-      assert robot.y == 6
+      assert robot.y == 100
     end
   end
 

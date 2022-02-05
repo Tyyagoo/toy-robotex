@@ -13,6 +13,7 @@ defmodule ToyRobot.Robot do
   Create a new robot.
 
   ## Examples
+  When using default params
     iex> alias ToyRobot.Robot
     ToyRobot.Robot
     iex> Robot.new()
@@ -20,6 +21,19 @@ defmodule ToyRobot.Robot do
   """
   @spec new() :: t()
   def new(), do: %Robot{}
+
+  @doc """
+  Create a new robot.
+
+  ## Examples
+  When using custom params
+    iex> alias ToyRobot.Robot
+    ToyRobot.Robot
+    iex> Robot.new(1, 2, :south)
+    %Robot{x: 1, y: 2, facing: :south}
+  """
+  @spec new(x :: integer, y :: integer, facing :: Cardinal.t()) :: t()
+  def new(x, y, facing), do: %Robot{x: x, y: y, facing: facing}
 
   @doc """
   Moves the robot foward by one space, ignores if robot is on table limit.
@@ -30,15 +44,15 @@ defmodule ToyRobot.Robot do
     iex> robot = Robot.new()
     %Robot{x: 0, y: 0, facing: :north}
     iex> 1..10 |> Enum.reduce(robot, fn _, r -> Robot.move(r) end)
-    %Robot{x: 0, y: 6, facing: :north}
+    %Robot{x: 0, y: 10, facing: :north}
   """
   @spec move(robot :: t()) :: t()
   def move(%Robot{facing: facing} = robot) do
     case facing do
-      :north -> %Robot{robot | y: min(robot.y + 1, 6)}
-      :south -> %Robot{robot | y: max(robot.y - 1, 0)}
-      :east -> %Robot{robot | x: min(robot.x + 1, 6)}
-      :west -> %Robot{robot | x: max(robot.x - 1, 0)}
+      :north -> %Robot{robot | y: robot.y + 1}
+      :south -> %Robot{robot | y: robot.y - 1}
+      :east -> %Robot{robot | x: robot.x + 1}
+      :west -> %Robot{robot | x: robot.x - 1}
       _ -> robot
     end
   end
