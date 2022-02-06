@@ -116,4 +116,50 @@ defmodule ToyRobot.Command.RunnerTest do
     assert robot.y == 2
     assert robot.facing == :north
   end
+
+  describe "when robot is trying to move outside boundaries" do
+    test "it must ignore the command when facing north" do
+      %Simulation{robot: robot} =
+        [
+          {:place, %{x: 0, y: 4, facing: :north}},
+          :move
+        ]
+        |> Runner.run()
+
+      assert robot.y == 4
+    end
+
+    test "it must ignore the command when facing east" do
+      %Simulation{robot: robot} =
+        [
+          {:place, %{x: 4, y: 0, facing: :east}},
+          :move
+        ]
+        |> Runner.run()
+
+      assert robot.x == 4
+    end
+
+    test "it must ignore the command when facing south" do
+      %Simulation{robot: robot} =
+        [
+          {:place, %{x: 0, y: 0, facing: :south}},
+          :move
+        ]
+        |> Runner.run()
+
+      assert robot.y == 0
+    end
+
+    test "it must ignore the command when facing west" do
+      %Simulation{robot: robot} =
+        [
+          {:place, %{x: 0, y: 0, facing: :west}},
+          :move
+        ]
+        |> Runner.run()
+
+      assert robot.x == 0
+    end
+  end
 end

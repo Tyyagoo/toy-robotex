@@ -23,13 +23,14 @@ defmodule ToyRobot.Command.ParserTest do
       [
         "",
         "SPIN",
-        "TWIRL",
         "RIGHT",
         "move",
         "PLACE",
         "MOVE 10",
         "PLACE 1,2,SOUTI",
+        "PLACE 1, 2, SOUTH",
         "PLACE a,b,NORTH"
+        # "PLACE a,b,c,d" -> ~r/\APLACE (\d+),(\d+),(NORTH|EAST|SOUTH|WEST)\z/  <> just use this regex to solve this border case
       ]
       |> Parser.parse()
 
