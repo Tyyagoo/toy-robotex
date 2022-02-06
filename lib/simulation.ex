@@ -121,17 +121,14 @@ defmodule ToyRobot.Simulation do
     ...> robot: %Robot{x: 0, y: 0, facing: :north}
     ...> }
     iex> simulation |> Simulation.turn_left
-    {
-      :ok,
-      %Simulation{
-        table: table,
-        robot: %Robot{x: 0, y: 0, facing: :west}
-      }
+    %Simulation{
+      table: table,
+      robot: %Robot{x: 0, y: 0, facing: :west}
     }
   """
-  @spec turn_left(simulation :: t()) :: {:ok, t()}
+  @spec turn_left(simulation :: t()) :: t()
   def turn_left(%Simulation{robot: robot} = simulation) do
-    {:ok, %Simulation{simulation | robot: robot |> Robot.rotate(:left)}}
+    %Simulation{simulation | robot: robot |> Robot.rotate(:left)}
   end
 
   @doc """
@@ -148,17 +145,14 @@ defmodule ToyRobot.Simulation do
     ...> robot: %Robot{x: 0, y: 0, facing: :north}
     ...> }
     iex> simulation |> Simulation.turn_right
-    {
-      :ok,
-      %Simulation{
-        table: table,
-        robot: %Robot{x: 0, y: 0, facing: :east}
-      }
+    %Simulation{
+      table: table,
+      robot: %Robot{x: 0, y: 0, facing: :east}
     }
   """
-  @spec turn_right(simulation :: t()) :: {:ok, t()}
+  @spec turn_right(simulation :: t()) :: t()
   def turn_right(%Simulation{robot: robot} = simulation) do
-    {:ok, %{simulation | robot: robot |> Robot.rotate(:right)}}
+    %{simulation | robot: robot |> Robot.rotate(:right)}
   end
 
   @doc """

@@ -24,6 +24,25 @@ defmodule ToyRobot.Cardinal do
   def from_string(_), do: {:error, "Invalid direction"}
 
   @doc """
+  Returns an ok tuple with the String representation of the direction if it's a valid direction.
+  Otherwise returns an error tuple.
+  
+  ## Examples
+    iex> alias ToyRobot.Cardinal
+    ToyRobot.Cardinal
+    iex> Cardinal.to_string(:north)
+    {:ok, "NORTH"}
+    iex> Cardinal.from_string(:wesp)
+    {:error, "Invalid direction"}
+  """
+  @spec to_string(direction :: t()) :: {:ok, String.t()} | {:error, reason :: String.t()}
+  def to_string(:north), do: {:ok, "NORTH"}
+  def to_string(:east), do: {:ok, "EAST"}
+  def to_string(:south), do: {:ok, "SOUTH"}
+  def to_string(:west), do: {:ok, "WEST"}
+  def to_string(_), do: {:error, "Invalid direction"}
+
+  @doc """
   Returns an ok tuple with the neighbour of `direction` in the desired sense.
   If some param is invalid, return an error tuple.
   
